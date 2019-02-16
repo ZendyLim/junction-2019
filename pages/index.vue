@@ -90,7 +90,7 @@ export default {
         // The signed-in user info.
         const user = result.user
         // ...
-        this.$store.dispatch('addAuthenaticatedUser', {
+        this.$store.dispatch('addAuthenticatedUser', {
           ...newUser,
           token: token,
           uid: result.user.uid

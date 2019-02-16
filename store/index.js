@@ -14,8 +14,7 @@ const mutations = {
 }
 
 const actions = {
-  // addAuthenalizeUser({mutations}, user){}
-  addAuthenaticatedUser(context, user) {
+  addAuthenticatedUser(context, user) {
     context.commit('addUser', user)
   }
 }
