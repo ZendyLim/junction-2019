@@ -16,10 +16,7 @@ export default {
   methods: {
     goto(url) {
       this.$router.push({
-        path: '/article',
-        params: {
-          url: this.article.url
-        }
+        path: `/article?url=${this.article.url}`
       })
     }
   }
