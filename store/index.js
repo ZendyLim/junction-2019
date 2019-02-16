@@ -1,22 +1,23 @@
+import actions from './actions'
+
 const state = () => ({
   user: {
     token: '',
     name: 'task-k0414',
     photoURL: '',
     uid: ''
-  }
+  },
+  articles: []
 })
 
 const mutations = {
   addUser(state, user) {
     state.user = user
-  }
-}
-
-const actions = {
-  addAuthenticatedUser(context, user) {
-    context.commit('addUser', user)
-  }
+  },
+  
+  addArticles(state, articles) {
+    state.articles = articles
+  },
 }
 
 export default {
