@@ -54,8 +54,11 @@ export default {
     context.commit('addArticles', articles)
   },
 
+  // async serveRelatedArticles(context, topic) {},
+
   async serveHoaxy(context, topic) {
-    console.log('serveHoaxy')
+    if (!topic) return
+
     const url = `https://api-hoaxy.p.rapidapi.com/articles`
 
     const results = await axios.get(url, {
@@ -69,7 +72,9 @@ export default {
       }
     })
 
-    console.log(results)
+    const fiveRelatedArticles = results.data.articles.slice(0, 5)
+    
+    context.commit('setRelatedArticles', fiveRelatedArticles)
   },
 
   async serveLexper(context, url) {
