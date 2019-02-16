@@ -27,6 +27,9 @@ export default {
   computed: {
     isMachPassword() {
       return this.password === this.retypePassword && this.password !== ''
+    },
+    userName() {
+      return this.$store.state.user.name
     }
   }
 }
