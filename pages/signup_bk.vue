@@ -90,6 +90,11 @@ export default {
         // The signed-in user info.
         const user = result.user
         // ...
+        this.$store.dispatch('addAuthenticatedUser', {
+          ...newUser,
+          token: token,
+          uid: result.user.uid
+        })
       })
       .catch(function(error) {
         // Handle Errors here.
