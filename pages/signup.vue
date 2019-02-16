@@ -90,12 +90,19 @@ export default {
       const token = result.credential.accessToken
       // The signed-in user info.
       const user = result.user
-        
+
       this.$store.dispatch('addAuthenticatedUser', {
         ...newUser,
         token: token,
         uid: result.user.uid
       })
+    }
+  },
+  // middleware: 'authentication'
+  fetch({store, redirect}) {
+    if (sessionStorage.token) {
+      console.log("inside SIGNUPVUE  ->", sessionStorage);
+      return redirect('/')
     }
   }
 }

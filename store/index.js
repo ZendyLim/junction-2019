@@ -15,6 +15,7 @@ const mutations = {
 
 const actions = {
   addAuthenticatedUser(context, user) {
+    sessionStorage.token = user.token
     context.commit('addUser', user)
   }
 }

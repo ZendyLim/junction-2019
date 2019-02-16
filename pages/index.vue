@@ -19,7 +19,7 @@ export default {
   },
   data: function() {
     return {
-      topics: ['VR', 'AR'],
+      topics: ['japan'],
       displayedArticles: [],
       articles: []
     }
@@ -74,7 +74,9 @@ export default {
     displayedArticles.push(...toBeDisplayedArticles)
 
     this.displayedArticles = displayedArticles
-  }
+  },
+  // middleware: 'authentication'
 }
+
 </script>
 
