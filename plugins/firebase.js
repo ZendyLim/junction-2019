@@ -13,3 +13,4 @@ const config = {
 firebase.initializeApp(config)
 
 Vue.prototype.$firebase = firebase
+Vue.prototype.$firestore = firebase.firestore()

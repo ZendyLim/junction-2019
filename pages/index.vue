@@ -67,7 +67,24 @@ export default {
     this.$firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function(result) {
+      .then(result => {
+        console.log(result)
+
+        const newUser = {
+          name: result.user.displayName,
+          photoURL: result.user.photoURL
+        }
+
+        this.$firestore
+          .collection('users')
+          .doc(result.user.uid)
+          .set(newUser)
+          .then(function() {
+            console.log("hey it's done")
+          })
+          .catch(function(error) {
+            console.error(error)
+          })
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         const token = result.credential.accessToken
         // The signed-in user info.
