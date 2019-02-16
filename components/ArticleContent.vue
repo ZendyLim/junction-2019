@@ -15,6 +15,7 @@ export default {
     await this.$store.dispatch('serveLexper', this.url)
     console.log('ok')
     this.content = this.$store.state.articleContent
+    await this.$store.dispatch('serveHoaxy', this.$store.state.articleContent.title)
   },
   data: function() {
     return {
