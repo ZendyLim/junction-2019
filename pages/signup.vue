@@ -7,11 +7,11 @@
       label="Enter your email ID"
       required
     ></v-text-field>
-    <!-- TODO add nameRoules later -->
+    <!-- TODO add nameRules later -->
     <v-text-field v-model="password" label="Type your password" required></v-text-field>
 
     <v-text-field v-model="retypePassword" label="Retype your password"></v-text-field>
-    <v-btn :disabled="!isMachPassword" color="success">SIGNUP</v-btn>
+    <v-btn :disabled="!isMatchPassword" color="success">SIGNUP</v-btn>
   </v-form>
 </template>
 
@@ -25,8 +25,11 @@ export default {
     }
   },
   computed: {
-    isMachPassword() {
+    isMatchPassword() {
       return this.password === this.retypePassword && this.password !== ''
+    },
+    userName() {
+      return this.$store.state.user.name
     }
   }
 }
