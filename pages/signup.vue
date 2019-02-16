@@ -8,20 +8,30 @@
       required
     ></v-text-field>
 
-    <v-text-field v-model="email" :rules="emailRules" label="Type your password" required></v-text-field>
+    <v-text-field v-model="password" label="Type your password" required></v-text-field>
 
-    <v-select
-      v-model="select"
-      :items="items"
-      :rules="[v => !!v || 'Item is required']"
-      label="Retype your password"
-      required
-    ></v-select>
-
-    <v-btn :disabled="!valid" color="success" @click="validate">SIGNUP</v-btn>
+    <v-text-field v-model="retypePassword" label="Retype your password"></v-text-field>
+    <v-btn :disabled="!isMachPassword" color="success" @click="validate">SIGNUP</v-btn>
 
     <v-btn color="error" @click="reset">Reset Form</v-btn>
 
     <v-btn color="warning" @click="resetValidation">Reset Validation</v-btn>
   </v-form>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: '',
+      password: '',
+      retypePassword: ''
+    }
+  },
+  computed: {
+    isMachPassword() {
+      return this.password === this.retypePassword && this.password !== ''
+    }
+  }
+}
+</script>
