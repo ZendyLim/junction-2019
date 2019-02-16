@@ -31,7 +31,7 @@ export default {
     await this.$store.dispatch('serveArticles', this.topics)
 
     await this.$store.dispatch('serveHoaxy', this.topics[0])
-    
+
     console.log('mounted!')
 
     const displayedArticles = this.displayedArticles.slice()

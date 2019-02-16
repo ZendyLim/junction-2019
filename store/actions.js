@@ -11,8 +11,7 @@ export default {
     topics.forEach(element => {
       topicPromises.push(
         axios.get(
-          `https://newsapi.org/v2/top-headlines?q=${element}
-          language: en&apiKey=835c120b246d4efbad69736be0e76af1`
+          `https://newsapi.org/v2/top-headlines?q=${element}&language=en&apiKey=835c120b246d4efbad69736be0e76af1`
         )
       )
     })
@@ -71,5 +70,22 @@ export default {
     })
 
     console.log(results)
+  },
+
+  async serveLexper(context, url) {
+    console.log('serveLexper')
+    const endpoint = 'https://lexper.p.rapidapi.com/v1.1/extract'
+
+    const results = await axios.get(endpoint, {
+      params: {
+        url: url,
+        media: 1
+      },
+      headers: {
+        'X-RapidAPI-Key': 'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
+      }
+    })
+
+    context.commit('setArticleContent', results.data.article)
   }
 }

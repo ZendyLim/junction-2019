@@ -7,17 +7,22 @@ const state = () => ({
     photoURL: '',
     uid: ''
   },
-  articles: []
+  articles: [],
+  articleContent: {}
 })
 
 const mutations = {
   addUser(state, user) {
     state.user = user
   },
-  
+
   addArticles(state, articles) {
     state.articles = articles
   },
+
+  setArticleContent(state, content) {
+    state.articleContent = content
+  }
 }
 
 export default {
