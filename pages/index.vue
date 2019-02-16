@@ -19,24 +19,27 @@ export default {
   data: function() {
     return {
       topics: ['Donald Trump', 'Whitehouse'],
-      displayedArticles: [],
+      displayedArticles: []
     }
   },
 
   created: async function() {
-    console.log("created!");
+    console.log('created!')
   },
 
-  mounted: async function(){
-    await this.$store.dispatch('serveArticles', this.topics);
+  mounted: async function() {
+    await this.$store.dispatch('serveArticles', this.topics)
+
+    await this.$store.dispatch('serveHoaxy', this.topics[0])
+    
     console.log('mounted!')
 
     const displayedArticles = this.displayedArticles.slice()
-    console.log(this.$store.state.articles);
+    console.log(this.$store.state.articles)
     const toBeDisplayedArticles = this.$store.state.articles.slice(0, 10)
     displayedArticles.push(...toBeDisplayedArticles)
 
-    this.displayedArticles = displayedArticles;
+    this.displayedArticles = displayedArticles
   }
 }
 </script>
