@@ -11,7 +11,8 @@ export default {
     topics.forEach(element => {
       topicPromises.push(
         axios.get(
-          `https://newsapi.org/v2/top-headlines?q=${element}&language=en&apiKey=835c120b246d4efbad69736be0e76af1`
+          `https://newsapi.org/v2/top-headlines?q=${element}
+          language: en&apiKey=835c120b246d4efbad69736be0e76af1`
         )
       )
     })
@@ -55,18 +56,20 @@ export default {
   },
 
   async serveHoaxy(context, topic) {
-      console.log('serveHoaxy')
-    const url =
-        'https://api-hoaxy.p.rapidapi.com/articles?sort_by=relevant&use_lucene_syntax=true&query=pizzagate+AND+date_published%3A%5B2016-10-28+TO+2016-12-04%5D'
+    console.log('serveHoaxy')
+    const url = `https://api-hoaxy.p.rapidapi.com/articles`
 
-    const results = await axios
-        .get(url, {
-          headers: {
-            'X-RapidAPI-Key':
-              'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
-          }
-        })
+    const results = await axios.get(url, {
+      headers: {
+        'X-RapidAPI-Key': 'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
+      },
+      params: {
+        sort_by: 'relevant',
+        use_lucene_syntax: 'true',
+        query: `${topic} AND date_published:[2016-10-28 TO 2016-12-04]`
+      }
+    })
 
-    console.log(results);
+    console.log(results)
   }
 }
