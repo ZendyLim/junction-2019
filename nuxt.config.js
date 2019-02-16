@@ -37,7 +37,11 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/vuetify', '@/plugins/firebase'],
+  plugins: [
+    '@/plugins/vuetify',
+    '@/plugins/firebase',
+    { src: '@plugins/persistedstate.js', ssr: false }
+  ],
 
   /*
   ** Nuxt.js modules
