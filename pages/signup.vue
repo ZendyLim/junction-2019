@@ -11,7 +11,7 @@
     <v-text-field v-model="password" label="Type your password" required></v-text-field>
 
     <v-text-field v-model="retypePassword" label="Retype your password"></v-text-field>
-    <v-btn :disabled="!isMachPassword" color="success">SIGNUP</v-btn>
+    <v-btn :disabled="!isMatchPassword" color="success">SIGNUP</v-btn>
   </v-form>
 </template>
 
