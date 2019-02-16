@@ -46,11 +46,27 @@ export default {
         array[randomIndex] = temporaryValue
       }
 
-    return array
+      return array
     }
 
     articles = shuffle(articles)
 
     context.commit('addArticles', articles)
+  },
+
+  async serveHoaxy(context, topic) {
+      console.log('serveHoaxy')
+    const url =
+        'https://api-hoaxy.p.rapidapi.com/articles?sort_by=relevant&use_lucene_syntax=true&query=pizzagate+AND+date_published%3A%5B2016-10-28+TO+2016-12-04%5D'
+
+    const results = await axios
+        .get(url, {
+          headers: {
+            'X-RapidAPI-Key':
+              'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
+          }
+        })
+
+    console.log(results);
   }
 }
