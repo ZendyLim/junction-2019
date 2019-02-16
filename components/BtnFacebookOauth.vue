@@ -67,9 +67,7 @@ export default {
         uid: result.user.uid
       })
 
-      this.$router.push({
-        path: `/article?url=https://abcnews.go.com/Politics/trumps-wall-money-military-housing-base-repairs/story?id=61109794`
-      })
+      this.$router.push({ path: `/` })
     }
   }
 }
