@@ -1,6 +1,6 @@
 <template>
   <div>
-    <article-content></article-content>
+    <article-content :url="this.$route.query.url"></article-content>
     <comments :url="this.$route.query.url"></comments>
 
     <!-- Related Articles -->

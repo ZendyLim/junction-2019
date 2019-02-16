@@ -55,18 +55,34 @@ export default {
   },
 
   async serveHoaxy(context, topic) {
-      console.log('serveHoaxy')
+    console.log('serveHoaxy')
     const url =
-        'https://api-hoaxy.p.rapidapi.com/articles?sort_by=relevant&use_lucene_syntax=true&query=pizzagate+AND+date_published%3A%5B2016-10-28+TO+2016-12-04%5D'
+      'https://api-hoaxy.p.rapidapi.com/articles?sort_by=relevant&use_lucene_syntax=true&query=pizzagate+AND+date_published%3A%5B2016-10-28+TO+2016-12-04%5D'
 
-    const results = await axios
-        .get(url, {
-          headers: {
-            'X-RapidAPI-Key':
-              'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
-          }
-        })
+    const results = await axios.get(url, {
+      headers: {
+        'X-RapidAPI-Key': 'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
+      }
+    })
 
-    console.log(results);
+    console.log(results)
+  },
+
+  async serveLexper(context, url) {
+    console.log('serveLexper')
+    const endpoint = 'https://lexper.p.rapidapi.com/v1.1/extract'
+
+    const results = await axios.get(endpoint, {
+      params: {
+        url:
+          'https://www.usatoday.com/story/news/politics/2019/02/16/national-emergency-donald-trump-republicans-divided-going-into-2020/2879232002/?utm_source=google&utm_medium=amp&utm_campaign=speakable',
+        media: 1
+      },
+      headers: {
+        'X-RapidAPI-Key': 'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
+      }
+    })
+
+    context.commit('setArticleContent', results.data.article)
   }
 }
