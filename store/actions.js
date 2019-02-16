@@ -11,8 +11,7 @@ export default {
     topics.forEach(element => {
       topicPromises.push(
         axios.get(
-          `https://newsapi.org/v2/top-headlines?q=${element}
-          language: en&apiKey=835c120b246d4efbad69736be0e76af1`
+          `https://newsapi.org/v2/top-headlines?q=${element}&language=en&apiKey=835c120b246d4efbad69736be0e76af1`
         )
       )
     })
