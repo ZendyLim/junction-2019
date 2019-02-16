@@ -9,6 +9,9 @@ const mutations = {
   addUser(state, user) {
     state.user = user
   },
+  removeUser(state) {
+    state.user = null
+  },
 
   addArticles(state, articles) {
     state.articles = articles

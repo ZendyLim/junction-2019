@@ -4,6 +4,9 @@ export default {
   addAuthenticatedUser(context, user) {
     if (user) context.commit('addUser', user)
   },
+  logout(context) {
+    context.commit('removeUser')
+  },
 
   async serveArticles(context, topics) {
     const topicPromises = []
