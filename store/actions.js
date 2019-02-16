@@ -74,8 +74,7 @@ export default {
 
     const results = await axios.get(endpoint, {
       params: {
-        url:
-          'https://www.usatoday.com/story/news/politics/2019/02/16/national-emergency-donald-trump-republicans-divided-going-into-2020/2879232002/?utm_source=google&utm_medium=amp&utm_campaign=speakable',
+        url: url,
         media: 1
       },
       headers: {
