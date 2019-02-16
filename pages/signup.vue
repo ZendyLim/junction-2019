@@ -19,17 +19,33 @@
 export default {
   data() {
     return {
-      name: '',
-      password: '',
-      retypePassword: ''
+      user: {
+        name: '',
+        password: '',
+        retypePassword: ''
+      }
     }
   },
   computed: {
-    isMachPassword() {
+    isMatchedPassword() {
       return this.password === this.retypePassword && this.password !== ''
     },
-    userName() {
-      return this.$store.state.user.name
+    booleanUserFields() {
+      return this.user.map(validfield => {
+        if(validfield != ''){
+          return true;
+        } else {
+          return false;
+        }
+      })
+    },
+    status() {
+      for (let i=0; i<booleanUserFields.length; i++) {
+        if (!booleanUserFields[i]) {
+          return 'Validation status failed';
+        }
+        return 'Validation status success!';
+      }
     }
   }
 }
