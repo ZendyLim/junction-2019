@@ -31,17 +31,26 @@ export default {
       return this.password === this.retypePassword && this.password !== ''
     },
     booleanUserFields() {
-      return this.user.map(validfield => {
-        if(validfield != ''){
-          return true;
-        } else {
-          return false;
+      let booleanStatusArray = [];
+
+       Object.entries(this.user).forEach(
+        ([key, value]) => {
+          if (value !== '') {
+            console.log("boolean TRUE");
+            booleanStatusArray.push(true);
+            // return true;
+          }
+          else {
+            console.log("boolean FALSE");
+            booleanStatusArray.push(false);
+          }
         }
-      })
+      )
+      return booleanStatusArray;
     },
     status() {
-      for (let i=0; i<booleanUserFields.length; i++) {
-        if (!booleanUserFields[i]) {
+      for (let i=0; i<this.booleanUserFields.length; i++) {
+        if (!this.booleanUserFields[i]) {
           return 'Validation status failed';
         }
         return 'Validation status success!';
