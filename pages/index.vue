@@ -73,6 +73,7 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import firebase from 'firebase'
 
 export default {
   components: {
@@ -80,4 +81,38 @@ export default {
     VuetifyLogo
   }
 }
+
+// Initialize Firebase
+const config = {
+  apiKey: 'AIzaSyD9KkFzAEzWMkwnYrev3tMXgqIoAI_wO78',
+  authDomain: 'waitwat-df0f4.firebaseapp.com',
+  databaseURL: 'https://waitwat-df0f4.firebaseio.com',
+  projectId: 'waitwat-df0f4',
+  storageBucket: 'waitwat-df0f4.appspot.com',
+  messagingSenderId: '949762856265'
+}
+firebase.initializeApp(config)
+
+const provider = new firebase.auth.FacebookAuthProvider()
+
+firebase
+  .auth()
+  .signInWithPopup(provider)
+  .then(function(result) {
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    const token = result.credential.accessToken
+    // The signed-in user info.
+    const user = result.user
+    // ...
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    const errorCode = error.code
+    const errorMessage = error.message
+    // The email of the user's account used.
+    const email = error.email
+    // The firebase.auth.AuthCredential type that was used.
+    const credential = error.credential
+    // ...
+  })
 </script>
