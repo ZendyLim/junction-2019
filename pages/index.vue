@@ -1,111 +1,80 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-xs-center">
-        <logo/>
-        <vuetify-logo/>
-      </div>
-      <v-card>
-        <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template</v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-            >documentation</a>.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              title="chat"
-            >discord</a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              title="contribute"
-            >issue board</a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em>
-              <small>&mdash; John Leider</small>
-            </em>
-          </div>
-          <hr class="my-3">
-          <a href="https://nuxtjs.org/" target="_blank">Nuxt Documentation</a>
-          <br>
-          <a href="https://github.com/nuxt/nuxt.js" target="_blank">Nuxt GitHub</a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn color="primary" flat nuxt to="/inspire">Continue</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-container grid-list-md text-xs-center>
+    <article-card
+      row
+      wrap
+      v-for="article in displayedArticles"
+      :key="article.url"
+      :article="article"
+    ></article-card>
+  </v-container>
 </template>
-
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
+import ArticleCard from '@/components/ArticleCard'
+import axios from 'axios'
+import { Promise } from 'q'
 export default {
   components: {
-    Logo,
-    VuetifyLogo
+    ArticleCard
   },
-  created: function() {
-    const provider = new this.$firebase.auth.FacebookAuthProvider()
+  data: function() {
+    return {
+      topics: ['VR', 'AR'],
+      displayedArticles: [],
+      articles: []
+    }
+  },
+  methods: {
+    shuffle(array) {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex
 
-    this.$firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(result => {
-        console.log(result)
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex -= 1
 
-        const newUser = {
-          name: result.user.displayName,
-          photoURL: result.user.photoURL
-        }
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex]
+        array[currentIndex] = array[randomIndex]
+        array[randomIndex] = temporaryValue
+      }
 
-        this.$firestore
-          .collection('users')
-          .doc(result.user.uid)
-          .set(newUser)
-          .then(function() {
-            console.log("hey it's done")
-          })
-          .catch(function(error) {
-            console.error(error)
-          })
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const token = result.credential.accessToken
-        // The signed-in user info.
-        const user = result.user
-        // ...
-        this.$store.dispatch('addAuthenticatedUser', {
-          ...newUser,
-          token: token,
-          uid: result.user.uid
-        })
+      return array
+    }
+  },
+  created: async function() {
+    const topicPromises = []
+    this.topics.forEach(element => {
+      topicPromises.push(
+        axios.get(
+          `https://newsapi.org/v2/top-headlines?q=${element}&language=en&apiKey=835c120b246d4efbad69736be0e76af1`
+        )
+      )
+    })
+
+    const result = await Promise.all(topicPromises)
+
+    let articles = []
+    let i = 0
+    result.forEach(obj => {
+      obj.data.articles.forEach(article => {
+        article.topic = this.topics[i]
+        articles.push(article)
       })
-      .catch(function(error) {
-        // Handle Errors here.
-        const errorCode = error.code
-        const errorMessage = error.message
-        // The email of the user's account used.
-        const email = error.email
-        // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential
-        // ...
-      })
+      i++
+    })
+
+    this.articles = this.shuffle(articles)
+
+    const displayedArticles = this.displayedArticles.slice()
+    const toBeDisplayedArticles = this.articles.slice(0, 10)
+    displayedArticles.push(...toBeDisplayedArticles)
+
+    this.displayedArticles = displayedArticles
   }
 }
 </script>
+
