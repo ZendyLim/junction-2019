@@ -1,12 +1,10 @@
 <template>
-  <v-container grid-list-md text-xs-center>
-    <article-card
-      row
-      wrap
-      v-for="article in displayedArticles"
-      :key="article.url"
-      :article="article"
-    ></article-card>
+  <v-container grid-list-md>
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <article-card v-for="article in displayedArticles" :key="article.url" :article="article"></article-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 <script>
@@ -19,7 +17,7 @@ export default {
   },
   data: function() {
     return {
-      topics: ['VR', 'AR'],
+      topics: ['Donald Trump', 'Whitehouse'],
       displayedArticles: [],
       articles: []
     }
