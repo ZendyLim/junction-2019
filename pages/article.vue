@@ -1,13 +1,7 @@
 <template>
   <div>
     <article-content></article-content>
-    <h2>Comments</h2>
-    <v-list two-line>
-      <comment></comment>
-      <comment></comment>
-    </v-list>
-
-    <comment-input></comment-input>
+    <comments :url="this.$route.query.url"></comments>
 
     <!-- Related Articles -->
     <v-card>
@@ -22,12 +16,11 @@
 
 <script>
 import ArticleContent from '@/components/ArticleContent'
-import Comment from '@/components/Comment'
-import CommentInput from '@/components/CommentInput'
+import Comments from '@/components/Comments'
 import RelatedArticleCard from '@/components/RelatedArticleCard'
 
 export default {
-  components: { ArticleContent, Comment, CommentInput, RelatedArticleCard },
+  components: { ArticleContent, Comments, RelatedArticleCard },
   created: function() {
     console.log('hola! load from api')
   },
@@ -39,11 +32,11 @@ export default {
 
 <style>
 .v-input--switch__track.theme--dark {
-  color: #1976d2;
+  color: #f44336;
 }
 
 .v-input--switch__thumb.theme--dark {
-  color: #2196f3;
+  color: #f44336;
 }
 </style>
 
