@@ -1,12 +1,7 @@
 import actions from './actions'
 
 const state = () => ({
-  user: {
-    token: '',
-    name: 'task-k0414',
-    photoURL: '',
-    uid: ''
-  },
+  user: null, // token, name, photoURL, uid
   articles: []
 })
 
@@ -14,10 +9,16 @@ const mutations = {
   addUser(state, user) {
     state.user = user
   },
-  
+
   addArticles(state, articles) {
     state.articles = articles
-  },
+  }
+}
+
+const getters = {
+  authenticated(state) {
+    return Boolean(state.user)
+  }
 }
 
 export default {

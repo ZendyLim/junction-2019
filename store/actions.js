@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   addAuthenticatedUser(context, user) {
-    context.commit('addUser', user)
+    if (user) context.commit('addUser', user)
   },
 
   async serveArticles(context, topics) {
@@ -46,7 +46,7 @@ export default {
         array[randomIndex] = temporaryValue
       }
 
-    return array
+      return array
     }
 
     articles = shuffle(articles)
