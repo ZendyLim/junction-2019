@@ -73,6 +73,9 @@ export default {
     })
 
     console.log(results)
+    const fiveRelatedArticles = results.data.articles.slice(0, 5)
+
+    context.commit('setRelatedArticles', fiveRelatedArticles)
   },
 
   async getUserTopics(context, prop) {
@@ -84,9 +87,6 @@ export default {
     const userData = user.data()
 
     context.commit('setSubbedTopics', userData.topics)
-    const fiveRelatedArticles = results.data.articles.slice(0, 5)
-
-    context.commit('setRelatedArticles', fiveRelatedArticles)
   },
 
   async serveLexper(context, url) {
