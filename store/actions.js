@@ -11,8 +11,7 @@ export default {
     topics.forEach(element => {
       topicPromises.push(
         axios.get(
-          `https://newsapi.org/v2/top-headlines?q=${element}
-          language: en&apiKey=835c120b246d4efbad69736be0e76af1`
+          `https://newsapi.org/v2/top-headlines?q=${element}&language=en&apiKey=835c120b246d4efbad69736be0e76af1`
         )
       )
     })
@@ -71,5 +70,16 @@ export default {
     })
 
     console.log(results)
+  },
+
+  async getUserTopics(context, prop) {
+    const user = await prop.firestore
+      .collection('users')
+      .doc(prop.uid)
+      .get()
+
+    const userData = user.data()
+
+    context.commit('setSubbedTopics', userData.topics)
   }
 }

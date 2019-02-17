@@ -67,7 +67,7 @@ export default {
         uid: result.user.uid
       })
 
-      this.$router.push({ path: `/` })
+      this.$router.push({ path: `/topic` })
     }
   }
 }
