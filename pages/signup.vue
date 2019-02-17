@@ -27,7 +27,7 @@ export default {
       }
       if (
         this.name === '' ||
-        this.passwoerd === '' ||
+        this.password === '' ||
         this.retypePassword === ''
       ) {
         return true

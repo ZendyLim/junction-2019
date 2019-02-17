@@ -1,11 +1,12 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
-      <v-card color="grey darken-2" class="white--text">
+      <v-card @click="goto(article.canonical_url || '')" color="grey darken-2" class="white--text">
         <v-card-title primary-title>
           <div>
-            <div class="headline">Article Title</div>
-            <span>Article excerpt. Sed congue cursus libero a scelerisque. Donec id vestibulum nunc. Nam sed ipsum pharetra nisl dapibus ornare. Etiam a porta elit. Donec placerat quam ante, ultrices ultrices est placerat ac. Donec a ipsum auctor orci malesuada placerat.</span>
+            <div class="headline">{{article.title || "Title"}}</div>
+            <div>{{article.domain || "domain"}}</div>
+            <div>{{article.site_type || "type"}}</div>
           </div>
         </v-card-title>
       </v-card>
@@ -15,5 +16,14 @@
 
 
 <script>
-export default {}
+export default {
+  props: ['article'],
+  methods: {
+    goto(url) {
+      this.$router.push({
+        path: `/article?url=${url}`
+      })
+    }
+  }
+}
 </script>

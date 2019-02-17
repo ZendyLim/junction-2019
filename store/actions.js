@@ -54,8 +54,11 @@ export default {
     context.commit('addArticles', articles)
   },
 
+  // async serveRelatedArticles(context, topic) {},
+
   async serveHoaxy(context, topic) {
-    console.log('serveHoaxy')
+    if (!topic) return
+
     const url = `https://api-hoaxy.p.rapidapi.com/articles`
 
     const results = await axios.get(url, {
@@ -81,5 +84,25 @@ export default {
     const userData = user.data()
 
     context.commit('setSubbedTopics', userData.topics)
+    const fiveRelatedArticles = results.data.articles.slice(0, 5)
+
+    context.commit('setRelatedArticles', fiveRelatedArticles)
+  },
+
+  async serveLexper(context, url) {
+    console.log('serveLexper')
+    const endpoint = 'https://lexper.p.rapidapi.com/v1.1/extract'
+
+    const results = await axios.get(endpoint, {
+      params: {
+        url: url,
+        media: 1
+      },
+      headers: {
+        'X-RapidAPI-Key': 'adbe0b85bemshff1eee1ef3cdd3cp1d4c65jsn127c9272c6fc'
+      }
+    })
+
+    context.commit('setArticleContent', results.data.article)
   }
 }

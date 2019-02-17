@@ -46,7 +46,9 @@ export default {
     displayedArticles.push(...toBeDisplayedArticles)
 
     this.displayedArticles = displayedArticles
-  }
+  },
+
+  middleware: "authenticate"
 }
 </script>
 

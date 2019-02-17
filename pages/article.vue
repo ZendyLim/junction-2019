@@ -1,14 +1,17 @@
 <template>
   <div>
-    <article-content></article-content>
+    <article-content :url="this.$route.query.url"></article-content>
     <comments :url="this.$route.query.url"></comments>
 
     <!-- Related Articles -->
     <v-card>
       <v-container fluid grid-list-lg>
         <h2>Related Articles</h2>
-        <related-article-card></related-article-card>
-        <related-article-card></related-article-card>
+          <related-article-card
+            v-for="article in this.$store.state.relatedArticles"
+            :key="article.id"
+            :article="article"
+          ></related-article-card>
       </v-container>
     </v-card>
   </div>
