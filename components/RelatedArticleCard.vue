@@ -6,7 +6,13 @@
           <div>
             <div class="headline">{{article.title || "Title"}}</div>
             <div>{{article.domain || "domain"}}</div>
-            <div>{{article.site_type || "type"}}</div>
+            <v-chip color="indigo" text-color="white">
+              <v-avatar>
+                <v-icon>account_circle</v-icon>
+              </v-avatar>
+              {{article.site_type || "type"}}
+            </v-chip>
+            <div> Tweeted: {{article.number_of_tweets}} </div>
           </div>
         </v-card-title>
       </v-card>
