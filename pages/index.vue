@@ -2,7 +2,13 @@
   <v-container grid-list-md>
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
-        <article-card v-for="article in displayedArticles" :key="article.url" :article="article"></article-card>
+        <v-progress-linear
+          indeterminate="true"
+          v-if="!displayedArticles || displayedArticles.length <= 0"
+        />
+        <div v-if="displayedArticles">
+          <article-card v-for="article in displayedArticles" :key="article.url" :article="article"></article-card>
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
@@ -40,7 +46,7 @@ export default {
     this.displayedArticles = displayedArticles
   },
 
-  middleware: "authenticate"
+  middleware: 'authenticate'
 }
 </script>
 

@@ -1,9 +1,12 @@
 <template>
   <div>
-    <v-img :src="content.image"></v-img>
-    <h1>{{content.title}}</h1>
-    <small>Written by: {{content.author}} - {{content.pub_date}}</small>
-    <p v-html="content.html"></p>
+    <v-progress-linear indeterminate="true" v-if="!content.title"/>
+    <div v-if="content.title">
+      <v-img :src="content.image"></v-img>
+      <h1>{{content.title}}</h1>
+      <small>Written by: {{content.author}} - {{content.pub_date}}</small>
+      <p v-html="content.html"></p>
+    </div>
   </div>
 </template>
 
@@ -15,7 +18,10 @@ export default {
     await this.$store.dispatch('serveLexper', this.url)
     console.log('ok')
     this.content = this.$store.state.articleContent
-    await this.$store.dispatch('serveHoaxy', this.$store.state.articleContent.title)
+    await this.$store.dispatch(
+      'serveHoaxy',
+      this.$store.state.articleContent.title
+    )
   },
   data: function() {
     return {
