@@ -17,7 +17,7 @@
 
 <script>
 import BtnFacebookOauth from '~/components/BtnFacebookOauth.vue'
-import Logo from '~/components/Logo.vue'
+import Logo from '~/components/LogoWaitwat.vue'
 export default {
   data() {
     return {
