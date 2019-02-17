@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-progress-linear indeterminate="true" v-if="!content.title"/>
+    <v-progress-linear indeterminate v-if="!content.title"/>
     <div v-if="content.title">
       <v-img :src="content.image"></v-img>
       <h1>{{content.title}}</h1>
