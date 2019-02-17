@@ -72,9 +72,21 @@ export default {
       }
     })
 
+    console.log(results)
     const fiveRelatedArticles = results.data.articles.slice(0, 5)
-    
+
     context.commit('setRelatedArticles', fiveRelatedArticles)
+  },
+
+  async getUserTopics(context, prop) {
+    const user = await prop.firestore
+      .collection('users')
+      .doc(prop.uid)
+      .get()
+
+    const userData = user.data()
+
+    context.commit('setSubbedTopics', userData.topics)
   },
 
   async serveLexper(context, url) {

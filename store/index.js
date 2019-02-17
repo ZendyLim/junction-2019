@@ -8,6 +8,7 @@ const state = () => ({
     uid: ''
   },
   articles: [],
+  subbedTopics: [],
   relatedArticles: [],
   articleContent: {}
 })
@@ -21,8 +22,12 @@ const mutations = {
     state.articles = articles
   },
 
+  setSubbedTopics(state, topics) {
+    state.subbedTopics = topics
+  },
+
   setRelatedArticles(state, articles) {
-    state.relatedArticles = articles;
+    state.relatedArticles = articles
   },
 
   setArticleContent(state, content) {

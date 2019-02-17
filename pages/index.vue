@@ -34,7 +34,15 @@ export default {
   },
 
   mounted: async function() {
+    await this.$store.dispatch('getUserTopics', {
+      firestore: this.$firestore,
+      uid: this.$store.state.user.uid
+    })
+
+    this.topics = this.$store.state.subbedTopics
+
     await this.$store.dispatch('serveArticles', this.topics)
+    await this.$store.dispatch('serveHoaxy', this.topics[0])
 
     console.log('mounted!')
 

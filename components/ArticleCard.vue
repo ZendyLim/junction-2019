@@ -3,7 +3,7 @@
     <v-flex class="text-xs-center" justify-center>
       <v-chip small>{{article.topic}}</v-chip>
     </v-flex>
-    <v-img :aspect-ratio="16/9" :src="article.urlToImage"></v-img>
+    <v-img :aspect-ratio="16/9" :src="article.urlToImage || 'https://placehold.it/300'"></v-img>
     <v-card-title>
       <p class="text-xs-left">{{article.title}}</p>
     </v-card-title>
