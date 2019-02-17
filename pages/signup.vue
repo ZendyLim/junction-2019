@@ -1,21 +1,21 @@
 <template>
- <div class="container">
-  <v-layout align-center justify-center row fill-height>
-    <v-flex xs11>
-      <v-content v-if="splash">
-        <Logo></Logo>
-      </v-content>
-      <v-content v-else>
-        <v-form>
-          <v-text-field v-model="name" :counter="10" label="Enter your email ID" required></v-text-field>
-          <v-text-field v-model="password" label="Type your password" required></v-text-field>
-          <v-text-field v-model="retypePassword" label="Retype your password"></v-text-field>
-          <v-btn :disabled="isInvalid">SIGNUP</v-btn>
-        </v-form>
-        <BtnFacebookOauth/>
-      </v-content>
-    </v-flex>
-  </v-layout>
+  <div class="container-signup">
+    <v-layout align-center justify-center row fill-height>
+      <v-flex xs11>
+        <v-content v-if="splash">
+          <Logo></Logo>
+        </v-content>
+        <v-content v-else>
+          <v-form>
+            <v-text-field v-model="name" :counter="10" label="Enter your email ID" required></v-text-field>
+            <v-text-field v-model="password" label="Type your password" required></v-text-field>
+            <v-text-field v-model="retypePassword" label="Retype your password"></v-text-field>
+            <v-btn :disabled="isInvalid">SIGNUP</v-btn>
+          </v-form>
+          <BtnFacebookOauth/>
+        </v-content>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -62,12 +62,12 @@ export default {
 }
 </script>
 <style>
-  .container {
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: top;
-    align-items: flex-start;
-    text-align: center;
-  }
+.container-signup {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: top;
+  align-items: flex-start;
+  text-align: center;
+}
 </style>
